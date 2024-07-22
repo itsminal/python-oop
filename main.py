@@ -1,28 +1,45 @@
 class Atm:
+    __counter = 1
+
     def __init__(self):
-        self.pin = ""
-        self.balance = 0
-        self.menu()
+        self.__pin = ""
+        self.__balance = 0
+        self.s_no = Atm.__counter
+        Atm.__counter = Atm.__counter + 1
+        # self.menu()
+
+    @staticmethod
+    def get_counter():
+        return Atm.__counter
+
+    @staticmethod
+    def set_counter(new):
+        if type(new) == int:
+            Atm.__counter = new
+        else:
+            print("Not allowed")
 
     def createPin(self):
-        self.pin = input("Enter your pin")
+        print(self.__pin)
+        self.__pin = input("Enter your pin")
+        print(self.__pin)
         print("Pin set")
 
     def deposit(self):
         temp = input("Enter your pin")
-        if temp == self.pin:
+        if temp == self.__pin:
             dep_amt = int(input("Enter the amt."))
-            self.balance = self.balance + dep_amt
+            self.__balance = self.__balance + dep_amt
             print("DEposit done")
         else:
             print("wrong pin")
 
     def withdraw(self):
         temp = input("Enter your pin")
-        if temp == self.pin:
+        if temp == self.__pin:
             with_amt = int(input("Enter the amt."))
-            if self.balance > with_amt:
-                self.balance = self.balance - with_amt
+            if self.__balance > with_amt:
+                self.__balance = self.__balance - with_amt
                 print("Withdrawal done")
             else:
                 print("amount exceeded")
@@ -32,8 +49,8 @@ class Atm:
 
     def check_bal(self):
         temp = input("Enter your pin")
-        if temp == self.pin:
-            print(self.balance)
+        if temp == self.__pin:
+            print(self.__balance)
         else:
             print("wrong pin")
 
@@ -56,7 +73,4 @@ class Atm:
         elif user_ip == "4":
             self.check_bal()
         else:
-            print("Exit")
-
-
-Atm1 = Atm()
+            exit(0)
